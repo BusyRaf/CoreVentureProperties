@@ -365,6 +365,15 @@
     }
     .footer__email:hover { color: var(--navy); }
 
+    .footer__colophon { text-align: center; margin-top: 24px; }
+    .footer__colophon a {
+      font-family: var(--mono); font-size: 8.5px;
+      letter-spacing: .18em; color: var(--ink-4); text-transform: uppercase;
+      text-decoration: none;
+      transition: color .2s ease;
+    }
+    .footer__colophon a:hover { color: var(--ink-3); }
+
     /* ─── Scroll-reveal ──────────────────────────────────────────────────── */
     .reveal {
       opacity: 0; transform: translateY(20px);
@@ -779,6 +788,9 @@
             holly@corepropertyventures.com
           </a>
         </div>
+      </div>
+      <div class="footer__colophon">
+        <a href="https://bunshin.io" target="_blank" rel="noopener noreferrer">crafted by Bunshin Development Studios</a>
       </div>
     </footer>
 
