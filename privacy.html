@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Privacy Policy — Core Property Ventures">
+  <title>Privacy Policy — Core Property Ventures</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Tokens ─────────────────────────────────────────────────────────── */
+    :root {
+      --ink:       #15182a;
+      --ink-2:     #3a3e52;
+      --ink-3:     #6a6e80;
+      --ink-4:     #b8b6ad;
+      --paper:     #f4f1ea;
+      --paper-2:   #ede9df;
+      --paper-3:   #e3dccc;
+      --navy:      #15233d;
+      --gold:      #c79a44;
+
+      --display: "Archivo",        -apple-system, system-ui, sans-serif;
+      --sans:    "Inter",          -apple-system, system-ui, sans-serif;
+      --serif:   "Fraunces",       Georgia, serif;
+      --mono:    "JetBrains Mono", "Courier New", monospace;
+
+      --gutter:      24px;
+      --section-gap: 52px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html  { scroll-behavior: smooth; }
+    body  {
+      background: var(--paper);
+      font-family: var(--sans);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .page {
+      width: 100%;
+      margin: 0 auto;
+      background: var(--paper);
+    }
+
+    /* ─── Type helpers ───────────────────────────────────────────────────── */
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--ink-2);
+    }
+    .eyebrow--gold { color: var(--gold); }
+    .eyebrow--navy { color: var(--navy); }
+
+    /* ─── Brand lockup ───────────────────────────────────────────────────── */
+    .lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .lockup__mark {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 1.5px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      flex: 0 0 auto;
+    }
+    .lockup__text {
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+    .lockup__word {
+      font-family: var(--display);
+      font-weight: 800; font-size: 19px;
+      letter-spacing: -.015em; color: var(--navy); line-height: 1;
+    }
+    .lockup__rule { height: 1px; background: var(--gold); width: 100%; margin-top: 3px; }
+    .lockup__sub  {
+      font-family: var(--mono); font-size: 7px; letter-spacing: .35em;
+      color: var(--navy); margin-top: 3px; text-transform: uppercase;
+    }
+
+    /* ─── Nav ────────────────────────────────────────────────────────────── */
+    .nav {
+      padding: 16px var(--gutter);
+      border-bottom: 1px solid var(--gold);
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0;
+      background: var(--paper);
+      z-index: 100;
+      transition: box-shadow .25s ease;
+    }
+    .nav.is-scrolled { box-shadow: 0 2px 18px rgba(21,24,42,.10); }
+    .nav-location {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--navy);
+    }
+
+    /* ─── Privacy content ────────────────────────────────────────────────── */
+    .privacy {
+      padding: 52px var(--gutter) 0;
+      max-width: 700px;
+    }
+
+    .privacy__headline {
+      font-family: var(--serif);
+      font-size: 42px; font-weight: 400;
+      color: var(--navy); line-height: 1.02; letter-spacing: -.02em;
+      margin-top: 16px;
+    }
+    .privacy__rule { width: 80px; height: 1px; background: var(--gold); margin-top: 22px; }
+    .privacy__updated {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: .2em; text-transform: uppercase;
+      color: var(--ink-3); margin-top: 14px;
+    }
+
+    .privacy__body { margin-top: 36px; }
+
+    .privacy__section { margin-top: 40px; }
+    .privacy__section:first-child { margin-top: 0; }
+
+    .privacy__section-title {
+      font-family: var(--serif); font-size: 20px; font-weight: 600;
+      color: var(--navy); line-height: 1.2; margin-bottom: 12px;
+    }
+
+    .privacy__text {
+      font-size: 15px; line-height: 1.7; color: var(--ink-2);
+    }
+    .privacy__text + .privacy__text { margin-top: 10px; }
+
+    .privacy__list {
+      list-style: none; margin-top: 12px;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .privacy__list li {
+      display: flex; gap: 12px;
+      font-size: 15px; line-height: 1.6; color: var(--ink-2);
+    }
+    .privacy__dot {
+      width: 6px; height: 6px; background: var(--gold);
+      border-radius: 50%; flex: 0 0 6px; margin-top: 8px;
+    }
+
+    .privacy__divider {
+      height: 1px; background: var(--ink-4); margin-top: 40px;
+    }
+
+    .privacy__contact {
+      margin-top: 36px;
+      padding: 24px;
+      border: 1px solid var(--gold);
+      position: relative;
+    }
+    .privacy__contact::after {
+      content: ""; position: absolute; inset: 5px;
+      border: 1px solid var(--ink-4); pointer-events: none;
+    }
+    .privacy__contact-label {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: .25em; text-transform: uppercase; color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .privacy__contact-line {
+      font-size: 14px; color: var(--ink-2); line-height: 1.6;
+    }
+    .privacy__contact-line a {
+      color: var(--navy); font-weight: 600; text-decoration: none;
+    }
+    .privacy__contact-line a:hover { text-decoration: underline; }
+
+    /* ─── Footer ─────────────────────────────────────────────────────────── */
+    footer { padding: 44px var(--gutter) 48px; margin-top: 52px; }
+    .footer__rule  { height: 1px; background: var(--gold); margin-bottom: 20px; }
+    .footer__inner { display: flex; justify-content: space-between; align-items: flex-end; }
+    .footer__right { text-align: right; }
+    .footer__email {
+      font-family: var(--mono); font-size: 9px;
+      letter-spacing: .14em; color: var(--ink-3); text-transform: uppercase;
+      text-decoration: none; display: block; margin-top: 6px;
+      transition: color .15s ease;
+    }
+    .footer__email:hover { color: var(--navy); }
+
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+    @media (min-width: 768px) {
+      :root {
+        --gutter:      60px;
+        --section-gap: 80px;
+      }
+      body { background: var(--paper-2); }
+      .page { max-width: 1140px; margin: 0 auto; }
+      .lockup__word  { font-size: 22px; }
+      .lockup__mark  { width: 34px; height: 34px; }
+      .lockup__mark svg { width: 20px; height: 14px; }
+      .lockup__sub   { font-size: 8px; }
+      .nav { padding: 20px var(--gutter); }
+      .privacy { padding: 80px var(--gutter) 0; }
+      .privacy__headline { font-size: 56px; }
+      footer { padding: 56px var(--gutter) 60px; margin-top: 80px; }
+    }
+
+    @media (min-width: 1200px) {
+      body { padding: 48px 24px 80px; }
+      .page { box-shadow: 0 24px 80px rgba(21,24,42,.10), 0 4px 16px rgba(21,24,42,.06); }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ── Nav ───────────────────────────────────────────────────────────── -->
+    <nav class="nav" id="nav" aria-label="Site navigation">
+      <a href="index.html" class="lockup" aria-label="Core Property Ventures — home">
+        <div class="lockup__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 16" width="17" height="11">
+            <rect x="0"  y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="6"  y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="12" y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="18" y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="3"  y="6"  width="5" height="4" fill="var(--gold)" />
+            <rect x="9"  y="6"  width="5" height="4" fill="var(--gold)" />
+            <rect x="15" y="6"  width="5" height="4" fill="var(--gold)" />
+            <rect x="6"  y="1"  width="5" height="4" fill="var(--gold)" />
+            <rect x="12" y="1"  width="5" height="4" fill="var(--gold)" />
+          </svg>
+        </div>
+        <div class="lockup__text">
+          <span class="lockup__word">CORE</span>
+          <div class="lockup__rule"></div>
+          <div class="lockup__sub">Property · Ventures</div>
+        </div>
+      </a>
+      <span class="nav-location" aria-label="Location: Jacksonville, Florida">Jacksonville · FL</span>
+    </nav>
+
+    <!-- ── Privacy content ──────────────────────────────────────────────── -->
+    <section class="privacy" aria-labelledby="privacy-hed">
+      <p class="eyebrow eyebrow--gold">Legal</p>
+      <h1 class="privacy__headline" id="privacy-hed">Privacy Policy</h1>
+      <div class="privacy__rule" aria-hidden="true"></div>
+      <p class="privacy__updated">Last updated: May 2026</p>
+
+      <div class="privacy__body">
+
+        <div class="privacy__section">
+          <h2 class="privacy__section-title">The short version</h2>
+          <p class="privacy__text">
+            When you fill out the offer request form on this site, you share some personal
+            information with us. We use that information only to respond to your inquiry and
+            discuss the potential purchase of your property. We don't sell it, share it for
+            marketing, or use it for anything else.
+          </p>
+        </div>
+
+        <div class="privacy__section">
+          <h2 class="privacy__section-title">What we collect</h2>
+          <p class="privacy__text">When you submit the offer request form, we collect:</p>
+          <ul class="privacy__list" aria-label="Information collected">
+            <li><span class="privacy__dot" aria-hidden="true"></span><span>Your name</span></li>
+            <li><span class="privacy__dot" aria-hidden="true"></span><span>Your phone number or email address</span></li>
+            <li><span class="privacy__dot" aria-hidden="true"></span><span>The address of the property you're inquiring about</span></li>
+            <li><span class="privacy__dot" aria-hidden="true"></span><span>Your preferred timeline (optional)</span></li>
+          </ul>
+          <p class="privacy__text" style="margin-top:14px;">
+            We do not collect payment information, government IDs, or any sensitive personal
+            data through this form.
+          </p>
+        </div>
+
+        <div class="privacy__section">
+          <h2 class="privacy__section-title">How we collect it</h2>
+          <p class="privacy__text">
+            Form submissions are processed by <strong>Formspree</strong> (formspree.io), a
+            third-party form handling service. When you submit the form, your information is
+            transmitted securely to Formspree and then forwarded to Holly McNally by email.
+            Formspree's own privacy practices are described at
+            <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener noreferrer" style="color:var(--navy);font-weight:600;">formspree.io/legal/privacy-policy</a>.
+          </p>
+          <p class="privacy__text">
+            This website does not use cookies, analytics trackers, or any other tracking
+            technology. No information is collected passively while you browse.
+          </p>
+        </div>
+
+        <div class="privacy__section">
+          <h2 class="privacy__section-title">How we use it</h2>
+          <p class="privacy__text">Your information is used only to:</p>
+          <ul class="privacy__list" aria-label="How information is used">
+            <li><span class="privacy__dot" aria-hidden="true"></span><span>Respond to your offer request within 24 hours</span></li>
+            <li><span class="privacy__dot" aria-hidden="true"></span><span>Discuss the property and answer any questions you have</span></li>
+            <li><span class="privacy__dot" aria-hidden="true"></span><span>Make a cash offer if your property fits our buying criteria</span></li>
+          </ul>
+          <p class="privacy__text" style="margin-top:14px;">
+            We will only contact you in connection with your specific inquiry. We do not add
+            you to any mailing list or send promotional messages.
+          </p>
+        </div>
+
+        <div class="privacy__section">
+          <h2 class="privacy__section-title">Who we share it with</h2>
+          <p class="privacy__text">
+            We do not sell, rent, or trade your personal information to any third party.
+            Your information is shared only with Formspree for the purpose of delivering your
+            submission to us (see above). No other third parties receive your data.
+          </p>
+        </div>
+
+        <div class="privacy__section">
+          <h2 class="privacy__section-title">How long we keep it</h2>
+          <p class="privacy__text">
+            We retain your information for as long as is reasonably necessary to follow up on
+            your inquiry. If a transaction does not proceed, your information is not retained
+            for any further purpose. You may request deletion at any time by contacting us
+            directly.
+          </p>
+        </div>
+
+        <div class="privacy__section">
+          <h2 class="privacy__section-title">Your rights</h2>
+          <p class="privacy__text">
+            You may request to access, correct, or delete the personal information we hold
+            about you at any time. To do so, contact Holly directly using the information below.
+          </p>
+        </div>
+
+        <div class="privacy__divider" aria-hidden="true"></div>
+
+        <div class="privacy__contact">
+          <p class="privacy__contact-label">Questions about this policy?</p>
+          <p class="privacy__contact-line">
+            Holly McNally · Core Property Ventures · Jacksonville, FL<br>
+            <a href="mailto:holly@corepropertyventures.com">holly@corepropertyventures.com</a>
+            &ensp;·&ensp;
+            <a href="tel:9042067479">904&thinsp;·&thinsp;206&thinsp;·&thinsp;7479</a>
+          </p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── Footer ────────────────────────────────────────────────────────── -->
+    <footer>
+      <div class="footer__rule" aria-hidden="true"></div>
+      <div class="footer__inner">
+        <a href="index.html" class="lockup" aria-label="Core Property Ventures — home">
+          <div class="lockup__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 16" width="17" height="11">
+              <rect x="0"  y="11" width="5" height="4" fill="var(--gold)" />
+              <rect x="6"  y="11" width="5" height="4" fill="var(--gold)" />
+              <rect x="12" y="11" width="5" height="4" fill="var(--gold)" />
+              <rect x="18" y="11" width="5" height="4" fill="var(--gold)" />
+              <rect x="3"  y="6"  width="5" height="4" fill="var(--gold)" />
+              <rect x="9"  y="6"  width="5" height="4" fill="var(--gold)" />
+              <rect x="15" y="6"  width="5" height="4" fill="var(--gold)" />
+              <rect x="6"  y="1"  width="5" height="4" fill="var(--gold)" />
+              <rect x="12" y="1"  width="5" height="4" fill="var(--gold)" />
+            </svg>
+          </div>
+          <div class="lockup__text">
+            <span class="lockup__word">CORE</span>
+            <div class="lockup__rule"></div>
+            <div class="lockup__sub">Property · Ventures</div>
+          </div>
+        </a>
+        <div class="footer__right">
+          <p class="eyebrow">Core PV · Jax FL</p>
+          <a href="mailto:holly@corepropertyventures.com" class="footer__email">
+            holly@corepropertyventures.com
+          </a>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /.page -->
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('is-scrolled', window.scrollY > 8);
+    }, { passive: true });
+  </script>
+</body>
+</html>
