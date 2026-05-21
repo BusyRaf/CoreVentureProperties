@@ -11,7 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <style>
-    /* ─── Design tokens ──────────────────────────────────────────────────── */
+    /* ─── Tokens ─────────────────────────────────────────────────────────── */
     :root {
       --ink:       #15182a;
       --ink-2:     #3a3e52;
@@ -21,40 +21,42 @@
       --paper-2:   #ede9df;
       --paper-3:   #e3dccc;
       --navy:      #15233d;
-      --navy-2:    #1d2e4d;
       --gold:      #c79a44;
-      --gold-soft: #d8b66a;
 
-      --display: "Archivo",      -apple-system, system-ui, sans-serif;
-      --sans:    "Inter",        -apple-system, system-ui, sans-serif;
-      --serif:   "Fraunces",     Georgia, serif;
+      --display: "Archivo",        -apple-system, system-ui, sans-serif;
+      --sans:    "Inter",          -apple-system, system-ui, sans-serif;
+      --serif:   "Fraunces",       Georgia, serif;
       --mono:    "JetBrains Mono", "Courier New", monospace;
 
-      --gutter: 24px;
-      --max-w:  440px;
+      /* Mobile defaults */
+      --gutter:      24px;
+      --section-gap: 52px;
     }
 
     /* ─── Reset ──────────────────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html  { scroll-behavior: smooth; }
     body  {
-      background: var(--paper-2);
+      background: var(--paper);
       font-family: var(--sans);
       color: var(--ink);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* ─── Page wrapper ───────────────────────────────────────────────────── */
+    /* ─── Page container ─────────────────────────────────────────────────── */
+    /* Mobile: full-width, no padding on body                                 */
+    /* ≥768px: centered column, max 1100px                                   */
     .page {
       width: 100%;
-      max-width: var(--max-w);
       margin: 0 auto;
       background: var(--paper);
     }
-    @media (min-width: 500px) {
-      body  { padding: 48px 16px 80px; }
-      .page { box-shadow: 0 24px 60px rgba(21,24,42,.16), 0 4px 16px rgba(21,24,42,.08); }
+
+    /* ─── Inner content wrapper (constrains content width on desktop) ─────── */
+    .inner {
+      padding-left: var(--gutter);
+      padding-right: var(--gutter);
     }
 
     /* ─── Type helpers ───────────────────────────────────────────────────── */
@@ -83,9 +85,6 @@
       border: 1.5px solid var(--gold);
       display: flex; align-items: center; justify-content: center;
       flex: 0 0 auto;
-    }
-    .lockup__mark--lg {
-      width: 34px; height: 34px;
     }
     .lockup__text {
       display: flex; flex-direction: column; align-items: flex-start;
@@ -120,6 +119,7 @@
       background: var(--paper);
       z-index: 100;
       transition: box-shadow .25s ease;
+      animation: slideDown .4s ease both;
     }
     .nav.is-scrolled { box-shadow: 0 2px 18px rgba(21,24,42,.10); }
 
@@ -128,14 +128,21 @@
       letter-spacing: .2em; text-transform: uppercase; color: var(--navy);
     }
 
-    /* ─── Hero ───────────────────────────────────────────────────────────── */
-    .hero { padding: 52px var(--gutter) 0; }
+    /* ─── Section header (brick + rule + label) ──────────────────────────── */
+    .section-header {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .section-header__rule { flex: 1; height: 1px; background: var(--navy); }
 
-    .hero__eyebrow  { animation: fadeUp .5s ease .05s both; }
+    /* ─── Hero ───────────────────────────────────────────────────────────── */
+    .hero {
+      padding: 52px var(--gutter) 0;
+    }
+    .hero__eyebrow  { animation: fadeUp .5s  ease .05s both; }
     .hero__headline { animation: fadeUp .65s ease .18s both; }
-    .hero__rule     { animation: fadeUp .5s ease .3s both; }
+    .hero__rule     { animation: fadeUp .5s  ease .30s both; }
     .hero__body     { animation: fadeUp .55s ease .38s both; }
-    .hero__cta      { animation: fadeUp .5s ease .5s both; }
+    .hero__cta      { animation: fadeUp .5s  ease .50s both; }
 
     .hero__headline {
       font-family: var(--serif);
@@ -144,12 +151,10 @@
       margin-top: 16px;
     }
     .hero__headline em { font-style: italic; color: var(--ink); font-weight: 400; }
-
     .hero__rule { width: 80px; height: 1px; background: var(--gold); margin-top: 22px; }
-
     .hero__body {
       font-size: 15px; line-height: 1.62; color: var(--ink-2);
-      margin-top: 16px; max-width: 340px;
+      margin-top: 16px;
     }
     .hero__cta { margin-top: 28px; }
 
@@ -160,18 +165,14 @@
       font-family: var(--display); font-size: 11px;
       letter-spacing: .2em; text-transform: uppercase; font-weight: 600;
       text-decoration: none; padding: 17px 28px;
-      border: 1.5px solid var(--navy);
-      position: relative;
+      border: 1.5px solid var(--navy); position: relative;
       transition: transform .15s ease, box-shadow .15s ease;
     }
     .btn-outline::after {
       content: ""; position: absolute; inset: 5px;
       border: 1px solid var(--navy); pointer-events: none;
     }
-    .btn-outline:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 18px rgba(21,35,61,.12);
-    }
+    .btn-outline:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(21,35,61,.12); }
     .btn-outline:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
 
     .btn-primary {
@@ -181,8 +182,7 @@
       border: 1.5px solid var(--navy);
       font-family: var(--display); font-size: 12px;
       letter-spacing: .2em; text-transform: uppercase; font-weight: 600;
-      padding: 18px 24px; cursor: pointer;
-      position: relative;
+      padding: 18px 24px; cursor: pointer; position: relative;
       transition: transform .15s ease, box-shadow .15s ease;
     }
     .btn-primary::after {
@@ -190,24 +190,16 @@
       border: 1px solid var(--gold); pointer-events: none;
       transition: inset .15s ease;
     }
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 8px 24px rgba(21,35,61,.2);
-    }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 24px rgba(21,35,61,.2); }
     .btn-primary:hover::after { inset: 4px; }
-    .btn-primary:active { transform: none; box-shadow: none; }
+    .btn-primary:active  { transform: none; box-shadow: none; }
     .btn-primary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
     .btn-primary:disabled { opacity: .6; cursor: default; transform: none; box-shadow: none; }
 
-    /* ─── Section header ─────────────────────────────────────────────────── */
-    .section-header {
-      display: flex; align-items: center; gap: 14px;
-    }
-    .section-header__rule { flex: 1; height: 1px; background: var(--navy); }
-
     /* ─── Owner block ────────────────────────────────────────────────────── */
-    .owner { padding: 52px var(--gutter) 0; }
+    .owner { padding: var(--section-gap) var(--gutter) 0; }
 
+    /* Mobile: photo + meta side by side, quote below */
     .owner__head { display: flex; gap: 18px; align-items: center; }
 
     .owner__photo {
@@ -218,22 +210,21 @@
     }
     .owner__photo img {
       width: 100%; height: 100%; object-fit: cover; display: block;
-      /* subtle desaturation for print-editorial feel */
       filter: saturate(.88) contrast(1.04);
       transition: filter .3s ease;
     }
     .owner__photo:hover img { filter: saturate(1) contrast(1); }
 
-    .owner__meta     { flex: 1; }
-    .owner__name     {
+    .owner__meta { flex: 1; }
+    .owner__name {
       font-family: var(--serif); font-size: 26px; font-weight: 500;
       color: var(--navy); line-height: 1; margin-top: 4px;
     }
-    .owner__title    {
+    .owner__title {
       font-family: var(--mono); font-size: 9.5px;
       letter-spacing: .2em; color: var(--ink-2); text-transform: uppercase; margin-top: 6px;
     }
-    .owner__accent   { width: 40px; height: 1px; background: var(--gold); margin-top: 10px; }
+    .owner__accent { width: 40px; height: 1px; background: var(--gold); margin-top: 10px; }
 
     .owner__quote {
       font-family: var(--serif); font-size: 16.5px; line-height: 1.6;
@@ -241,10 +232,11 @@
     }
 
     /* ─── Process ────────────────────────────────────────────────────────── */
-    .process { padding: 60px var(--gutter) 0; }
+    .process { padding: var(--section-gap) var(--gutter) 0; }
 
-    .process__steps  { margin-top: 22px; list-style: none; }
+    .process__steps { margin-top: 22px; list-style: none; }
 
+    /* Mobile: stacked rows */
     .process__step {
       display: flex; gap: 20px; padding: 22px 0;
       border-top: 1px solid var(--ink);
@@ -267,7 +259,7 @@
     .process__foot { height: 1px; background: var(--ink-4); }
 
     /* ─── As-is panel ────────────────────────────────────────────────────── */
-    .as-is { padding: 52px var(--gutter) 0; }
+    .as-is { padding: var(--section-gap) var(--gutter) 0; }
 
     .as-is__card {
       background: var(--navy); color: var(--paper);
@@ -278,7 +270,6 @@
       border: 1px solid var(--gold); pointer-events: none;
     }
     .as-is__inner { position: relative; }
-
     .as-is__headline {
       font-family: var(--serif); font-size: 23px; font-weight: 500;
       color: var(--paper); margin-top: 8px;
@@ -301,7 +292,8 @@
     }
 
     /* ─── Offer / form ───────────────────────────────────────────────────── */
-    .offer { padding: 60px var(--gutter) 0; }
+    .offer { padding: var(--section-gap) var(--gutter) 0; }
+    .offer__form-wrap { /* constrains form width on desktop */ }
 
     .offer__hed {
       font-family: var(--serif); font-size: 34px; font-weight: 500;
@@ -314,7 +306,7 @@
 
     .form { margin-top: 28px; display: flex; flex-direction: column; gap: 26px; }
 
-    .field        { display: flex; flex-direction: column; gap: 5px; }
+    .field { display: flex; flex-direction: column; gap: 5px; }
     .field__label {
       font-family: var(--mono); font-size: 9.5px;
       letter-spacing: .25em; text-transform: uppercase; color: var(--navy);
@@ -329,12 +321,10 @@
       -webkit-appearance: none; appearance: none;
     }
     .field__input::placeholder { color: var(--ink-4); font-style: italic; }
-    .field__input:focus        { border-bottom-color: var(--navy); }
+    .field__input:focus { border-bottom-color: var(--navy); }
     .field__input:hover:not(:focus) { border-bottom-color: var(--ink-3); }
 
-    /* Timeline chips */
     .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
-
     .chip {
       border: 1px solid var(--navy);
       padding: 8px 12px; font-size: 12px;
@@ -356,10 +346,7 @@
     .form__note a { color: var(--navy); font-weight: 600; text-decoration: none; }
     .form__note a:hover { text-decoration: underline; }
 
-    /* Success state */
-    .form__success {
-      display: none; text-align: center; padding: 40px 0;
-    }
+    .form__success { display: none; text-align: center; padding: 40px 0; }
     .form__success.is-visible { display: block; }
     .form__success-mark {
       display: inline-flex; align-items: center; justify-content: center;
@@ -367,17 +354,12 @@
       border-radius: 50%; background: var(--navy);
       border: 1.5px solid var(--gold); margin-bottom: 16px;
     }
-    .form__success-hed  {
-      font-family: var(--serif); font-size: 26px; color: var(--navy); margin-bottom: 10px;
-    }
-    .form__success-body {
-      font-size: 14px; color: var(--ink-2); line-height: 1.65;
-    }
+    .form__success-hed  { font-family: var(--serif); font-size: 26px; color: var(--navy); margin-bottom: 10px; }
+    .form__success-body { font-size: 14px; color: var(--ink-2); line-height: 1.65; }
     .form__success-body a { color: var(--navy); font-weight: 600; text-decoration: none; }
 
     /* ─── Footer ─────────────────────────────────────────────────────────── */
     footer { padding: 44px var(--gutter) 48px; margin-top: 52px; }
-
     .footer__rule  { height: 1px; background: var(--gold); margin-bottom: 20px; }
     .footer__inner { display: flex; justify-content: space-between; align-items: flex-end; }
     .footer__right { text-align: right; }
@@ -396,9 +378,7 @@
     }
     .reveal.is-visible { opacity: 1; transform: none; }
 
-    /* Hero entrance (CSS-driven, no JS needed) */
-    .nav { animation: slideDown .4s ease both; }
-
+    /* ─── Keyframes ──────────────────────────────────────────────────────── */
     @keyframes slideDown {
       from { opacity: 0; transform: translateY(-6px); }
       to   { opacity: 1; transform: none; }
@@ -408,18 +388,151 @@
       to   { opacity: 1; transform: none; }
     }
 
-    /* ─── Focus polish ───────────────────────────────────────────────────── */
     :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+
+    /* ═══════════════════════════════════════════════════════════════════════
+       DESKTOP — ≥ 768px
+       Everything below overrides the mobile defaults above.
+       ═══════════════════════════════════════════════════════════════════════ */
+    @media (min-width: 768px) {
+
+      :root {
+        --gutter:      60px;
+        --section-gap: 80px;
+      }
+
+      body { background: var(--paper-2); }
+
+      .page {
+        max-width: 1140px;
+        box-shadow: none; /* remove "phone card" shadow — it's a full site now */
+        margin: 0 auto;
+      }
+
+      /* Slightly larger lockup on desktop */
+      .lockup__word  { font-size: 22px; }
+      .lockup__mark  { width: 34px; height: 34px; }
+      .lockup__mark svg { width: 20px; height: 14px; }
+      .lockup__sub   { font-size: 8px; }
+      .nav { padding: 20px var(--gutter); }
+
+      /* ── Hero: large headline left, nothing changes structurally
+             but we scale the type up and add breathing room              ── */
+      .hero { padding: 80px var(--gutter) 0; }
+
+      .hero__headline {
+        font-size: 86px;
+        max-width: 640px;
+      }
+      .hero__body {
+        font-size: 17px;
+        max-width: 460px;
+        margin-top: 20px;
+      }
+      .hero__rule { margin-top: 28px; }
+      .hero__cta  { margin-top: 36px; }
+
+      /* ── Owner: photo LEFT (tall) | meta + quote RIGHT ─────────────────── */
+      .owner {
+        display: grid;
+        grid-template-columns: 280px 1fr;
+        grid-template-rows: auto;
+        column-gap: 56px;
+      }
+
+      /* .owner__head holds photo + meta — spans col 1, rows 1-2 on desktop */
+      .owner__head {
+        grid-column: 1;
+        grid-row: 1 / 3;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+      }
+      .owner__photo {
+        width: 100%;
+        height: 360px;
+        flex: none;
+      }
+      .owner__name   { font-size: 32px; }
+
+      /* Quote moves to col 2 */
+      .owner__quote {
+        grid-column: 2;
+        grid-row: 1;
+        margin-top: 0;
+        font-size: 21px;
+        line-height: 1.58;
+        align-self: center;
+      }
+
+      /* ── Process: 3 columns side by side ───────────────────────────────── */
+      .process__steps {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        border-top: 1px solid var(--ink);
+        margin-top: 28px;
+      }
+
+      .process__step {
+        flex-direction: column;
+        gap: 14px;
+        padding: 28px 32px 28px 0;
+        border-top: none;
+        border-right: 1px solid var(--ink-4);
+      }
+      .process__step:last-child { border-right: none; padding-right: 0; }
+      .process__step + .process__step {
+        border-top: none;   /* reset mobile */
+        padding-left: 32px;
+      }
+      .process__num  { font-size: 48px; width: auto; flex: none; }
+      .process__body { padding-top: 0; }
+      .process__title { font-size: 22px; }
+      .process__desc  { font-size: 14.5px; margin-top: 8px; }
+      .process__foot  { display: none; } /* grid handles the boundary */
+
+      /* ── As-is: more generous padding, 4-across bullets ────────────────── */
+      .as-is__card  { padding: 44px 48px 48px; }
+      .as-is__headline { font-size: 28px; }
+      .as-is__bullets {
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: 24px;
+        gap: 0 24px;
+      }
+      .as-is__bullet { font-size: 16px; }
+      .as-is__sub    { font-size: 14px; margin-top: 24px; }
+
+      /* ── Form: centered column, max 560px ──────────────────────────────── */
+      .offer { padding: var(--section-gap) var(--gutter) 0; }
+      .offer__form-wrap {
+        max-width: 560px;
+        margin: 0 auto;
+      }
+      .offer__hed { font-size: 42px; }
+      .offer__sub { font-size: 15px; }
+
+      /* ── Footer ─────────────────────────────────────────────────────────── */
+      footer { padding: 56px var(--gutter) 60px; margin-top: 80px; }
+    }
+
+    /* ── Very large screens: keep the 1140px column centered ─────────────── */
+    @media (min-width: 1200px) {
+      body { padding: 48px 24px 80px; }
+      .page {
+        box-shadow: 0 24px 80px rgba(21,24,42,.10), 0 4px 16px rgba(21,24,42,.06);
+      }
+    }
   </style>
 </head>
 <body>
   <div class="page">
 
-    <!-- ── Nav ────────────────────────────────────────────────────────────── -->
+    <!-- ── Nav ───────────────────────────────────────────────────────────── -->
     <nav class="nav" id="nav" aria-label="Site navigation">
       <a href="#" class="lockup" aria-label="Core Property Ventures">
         <div class="lockup__mark" aria-hidden="true">
-          <svg viewBox="0 0 24 16" width="17" height="11" aria-hidden="true">
+          <svg viewBox="0 0 24 16" width="17" height="11">
             <rect x="0"  y="11" width="5" height="4" fill="var(--gold)" />
             <rect x="6"  y="11" width="5" height="4" fill="var(--gold)" />
             <rect x="12" y="11" width="5" height="4" fill="var(--gold)" />
@@ -440,7 +553,7 @@
       <span class="nav-location" aria-label="Location: Jacksonville, Florida">Jacksonville · FL</span>
     </nav>
 
-    <!-- ── Hero ───────────────────────────────────────────────────────────── -->
+    <!-- ── Hero ──────────────────────────────────────────────────────────── -->
     <section class="hero" aria-labelledby="hero-hed">
       <p class="eyebrow eyebrow--gold hero__eyebrow">A Letter From the Owner · 2026</p>
       <h1 class="hero__headline" id="hero-hed">
@@ -459,11 +572,15 @@
       </div>
     </section>
 
-    <!-- ── Owner block ─────────────────────────────────────────────────────── -->
+    <!-- ── Owner block ────────────────────────────────────────────────────── -->
+    <!--
+      Mobile:  photo + meta side-by-side (owner__head), quote below full-width
+      Desktop: photo + meta stacked in col 1, quote in col 2 (CSS grid)
+    -->
     <section class="owner reveal" aria-labelledby="owner-name">
       <div class="owner__head">
         <div class="owner__photo">
-          <img src="assets/holly.jpg" alt="Holly McNally, owner of Core Property Ventures, smiling">
+          <img src="assets/holly.jpg" alt="Holly McNally, owner of Core Property Ventures">
         </div>
         <div class="owner__meta">
           <p class="eyebrow eyebrow--navy">Your Direct Contact</p>
@@ -480,11 +597,15 @@
       </blockquote>
     </section>
 
-    <!-- ── The Process ─────────────────────────────────────────────────────── -->
+    <!-- ── The Process ───────────────────────────────────────────────────── -->
+    <!--
+      Mobile:  stacked rows with horizontal rule dividers
+      Desktop: 3 columns with vertical dividers (CSS grid + border-right)
+    -->
     <section class="process reveal" aria-labelledby="process-hed">
       <div class="section-header">
         <div class="brick-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 16" width="21" height="14" aria-hidden="true">
+          <svg viewBox="0 0 24 16" width="21" height="14">
             <rect x="0"  y="11" width="5" height="4" fill="var(--gold)" />
             <rect x="6"  y="11" width="5" height="4" fill="var(--gold)" />
             <rect x="12" y="11" width="5" height="4" fill="var(--gold)" />
@@ -526,7 +647,7 @@
       <div class="process__foot" aria-hidden="true"></div>
     </section>
 
-    <!-- ── As-is panel ─────────────────────────────────────────────────────── -->
+    <!-- ── As-is panel ───────────────────────────────────────────────────── -->
     <section class="as-is reveal" aria-label="We purchase as-is">
       <div class="as-is__card">
         <div class="as-is__inlay" aria-hidden="true"></div>
@@ -534,18 +655,10 @@
           <p class="eyebrow eyebrow--gold">We Purchase As&#8209;Is</p>
           <h2 class="as-is__headline">Which means, simply:</h2>
           <ul class="as-is__bullets">
-            <li class="as-is__bullet">
-              <span class="as-is__dot" aria-hidden="true"></span>No repairs
-            </li>
-            <li class="as-is__bullet">
-              <span class="as-is__dot" aria-hidden="true"></span>No cleaning
-            </li>
-            <li class="as-is__bullet">
-              <span class="as-is__dot" aria-hidden="true"></span>No renovations
-            </li>
-            <li class="as-is__bullet">
-              <span class="as-is__dot" aria-hidden="true"></span>No commissions
-            </li>
+            <li class="as-is__bullet"><span class="as-is__dot" aria-hidden="true"></span>No repairs</li>
+            <li class="as-is__bullet"><span class="as-is__dot" aria-hidden="true"></span>No cleaning</li>
+            <li class="as-is__bullet"><span class="as-is__dot" aria-hidden="true"></span>No renovations</li>
+            <li class="as-is__bullet"><span class="as-is__dot" aria-hidden="true"></span>No commissions</li>
           </ul>
           <p class="as-is__sub">
             Inherited, tenant&#8209;occupied, vacant, or in need of work — all welcome.
@@ -555,11 +668,11 @@
       </div>
     </section>
 
-    <!-- ── Request an offer ────────────────────────────────────────────────── -->
+    <!-- ── Request an offer ──────────────────────────────────────────────── -->
     <section class="offer reveal" id="offer" aria-labelledby="offer-hed">
       <div class="section-header">
         <div class="brick-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 16" width="21" height="14" aria-hidden="true">
+          <svg viewBox="0 0 24 16" width="21" height="14">
             <rect x="0"  y="11" width="5" height="4" fill="var(--gold)" />
             <rect x="6"  y="11" width="5" height="4" fill="var(--gold)" />
             <rect x="12" y="11" width="5" height="4" fill="var(--gold)" />
@@ -575,105 +688,82 @@
         <h2 class="eyebrow eyebrow--navy" id="offer-hed">Request an Offer</h2>
       </div>
 
-      <p class="offer__hed">Tell Holly<br>about the property.</p>
-      <p class="offer__sub">No obligation. No agents. Holly responds personally within 24 hours.</p>
+      <!-- .offer__form-wrap centers and caps width on desktop -->
+      <div class="offer__form-wrap">
+        <p class="offer__hed">Tell Holly<br>about the property.</p>
+        <p class="offer__sub">No obligation. No agents. Holly responds personally within 24 hours.</p>
 
-      <!--
-        Formspree setup:
-          1. Create a free account at formspree.io
-          2. Create a new form — copy the form ID (looks like "xyzabcde")
-          3. Replace YOUR_FORM_ID below with that ID
+        <!--
+          Formspree: replace YOUR_FORM_ID with your 8-char form ID
           e.g.  action="https://formspree.io/f/xyzabcde"
-      -->
-      <form
-        class="form"
-        id="offer-form"
-        action="https://formspree.io/f/YOUR_FORM_ID"
-        method="POST"
-        novalidate
-      >
-        <!-- Hidden: timeline choice populated by chip selection -->
-        <input type="hidden" name="timeline" id="timeline-value" value="">
+        -->
+        <form
+          class="form"
+          id="offer-form"
+          action="https://formspree.io/f/YOUR_FORM_ID"
+          method="POST"
+          novalidate
+        >
+          <input type="hidden" name="timeline" id="timeline-value" value="">
 
-        <div class="field">
-          <label class="field__label" for="f-name">Name</label>
-          <input
-            class="field__input"
-            type="text"
-            id="f-name"
-            name="name"
-            placeholder="Your full name"
-            autocomplete="name"
-            required
-          >
-        </div>
-
-        <div class="field">
-          <label class="field__label" for="f-contact">Phone or Email</label>
-          <input
-            class="field__input"
-            type="text"
-            id="f-contact"
-            name="contact"
-            placeholder="Best way to reach you"
-            autocomplete="email"
-            required
-          >
-        </div>
-
-        <div class="field">
-          <label class="field__label" for="f-address">Property Address</label>
-          <input
-            class="field__input"
-            type="text"
-            id="f-address"
-            name="address"
-            placeholder="Street, city, ZIP"
-            autocomplete="street-address"
-            required
-          >
-        </div>
-
-        <div class="field">
-          <p class="field__label" id="timeline-label">Timeline</p>
-          <div class="chips" role="group" aria-labelledby="timeline-label">
-            <button type="button" class="chip" data-value="As soon as possible">As soon as possible</button>
-            <button type="button" class="chip" data-value="30 days">30 days</button>
-            <button type="button" class="chip" data-value="60–90 days">60–90 days</button>
-            <button type="button" class="chip" data-value="Just curious">Just curious</button>
+          <div class="field">
+            <label class="field__label" for="f-name">Name</label>
+            <input class="field__input" type="text" id="f-name" name="name"
+              placeholder="Your full name" autocomplete="name" required>
           </div>
+
+          <div class="field">
+            <label class="field__label" for="f-contact">Phone or Email</label>
+            <input class="field__input" type="text" id="f-contact" name="contact"
+              placeholder="Best way to reach you" autocomplete="email" required>
+          </div>
+
+          <div class="field">
+            <label class="field__label" for="f-address">Property Address</label>
+            <input class="field__input" type="text" id="f-address" name="address"
+              placeholder="Street, city, ZIP" autocomplete="street-address" required>
+          </div>
+
+          <div class="field">
+            <p class="field__label" id="timeline-label">Timeline</p>
+            <div class="chips" role="group" aria-labelledby="timeline-label">
+              <button type="button" class="chip" data-value="As soon as possible">As soon as possible</button>
+              <button type="button" class="chip" data-value="30 days">30 days</button>
+              <button type="button" class="chip" data-value="60–90 days">60–90 days</button>
+              <button type="button" class="chip" data-value="Just curious">Just curious</button>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-primary" id="submit-btn">Request an offer</button>
+
+          <p class="form__note">
+            Prefer to talk? Call or text Holly directly at&nbsp;<a href="tel:9042067479">904&thinsp;·&thinsp;206&thinsp;·&thinsp;7479</a>
+          </p>
+        </form>
+
+        <div class="form__success" id="form-success" role="alert" aria-live="polite">
+          <div class="form__success-mark" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M4 10.5L8.5 15L16 6" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3 class="form__success-hed">We've got your request.</h3>
+          <p class="form__success-body">
+            Holly will be in touch personally within 24 hours.<br>
+            You can also reach her directly at<br>
+            <a href="tel:9042067479">904&thinsp;·&thinsp;206&thinsp;·&thinsp;7479</a>
+          </p>
         </div>
-
-        <button type="submit" class="btn-primary" id="submit-btn">Request an offer</button>
-
-        <p class="form__note">
-          Prefer to talk? Call or text Holly directly at&nbsp;<a href="tel:9042067479">904&thinsp;·&thinsp;206&thinsp;·&thinsp;7479</a>
-        </p>
-      </form>
-
-      <!-- Success state shown after submission -->
-      <div class="form__success" id="form-success" role="alert" aria-live="polite">
-        <div class="form__success-mark" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-            <path d="M4 10.5L8.5 15L16 6" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <h3 class="form__success-hed">We've got your request.</h3>
-        <p class="form__success-body">
-          Holly will be in touch personally within 24 hours.<br>
-          You can also reach her directly at<br>
-          <a href="tel:9042067479">904&thinsp;·&thinsp;206&thinsp;·&thinsp;7479</a>
-        </p>
       </div>
     </section>
 
-    <!-- ── Footer ──────────────────────────────────────────────────────────── -->
+    <!-- ── Footer ────────────────────────────────────────────────────────── -->
     <footer>
       <div class="footer__rule" aria-hidden="true"></div>
       <div class="footer__inner">
         <a href="#" class="lockup" aria-label="Core Property Ventures">
           <div class="lockup__mark" aria-hidden="true">
-            <svg viewBox="0 0 24 16" width="17" height="11" aria-hidden="true">
+            <svg viewBox="0 0 24 16" width="17" height="11">
               <rect x="0"  y="11" width="5" height="4" fill="var(--gold)" />
               <rect x="6"  y="11" width="5" height="4" fill="var(--gold)" />
               <rect x="12" y="11" width="5" height="4" fill="var(--gold)" />
@@ -703,75 +793,58 @@
   </div><!-- /.page -->
 
   <script>
-    /* ── Scroll-reveal (IntersectionObserver) ───────────────────────────── */
+    /* ── Scroll-reveal ──────────────────────────────────────────────────── */
     const revealEls = document.querySelectorAll('.reveal');
-    const observer  = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
       });
     }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
-    revealEls.forEach(el => observer.observe(el));
+    revealEls.forEach(el => io.observe(el));
 
-    /* ── Nav shadow on scroll ────────────────────────────────────────────── */
+    /* ── Nav shadow ─────────────────────────────────────────────────────── */
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => {
       nav.classList.toggle('is-scrolled', window.scrollY > 8);
     }, { passive: true });
 
-    /* ── Timeline chip selection ─────────────────────────────────────────── */
-    const chips          = document.querySelectorAll('.chip');
-    const timelineInput  = document.getElementById('timeline-value');
-
+    /* ── Timeline chips ─────────────────────────────────────────────────── */
+    const chips         = document.querySelectorAll('.chip');
+    const timelineInput = document.getElementById('timeline-value');
     chips.forEach(chip => {
       chip.addEventListener('click', () => {
         const wasActive = chip.classList.contains('is-active');
         chips.forEach(c => c.classList.remove('is-active'));
-        if (!wasActive) {
-          chip.classList.add('is-active');
-          timelineInput.value = chip.dataset.value;
-        } else {
-          timelineInput.value = '';
-        }
+        if (!wasActive) { chip.classList.add('is-active'); timelineInput.value = chip.dataset.value; }
+        else             { timelineInput.value = ''; }
       });
     });
 
-    /* ── Form: AJAX submit to Formspree ──────────────────────────────────── */
-    const form       = document.getElementById('offer-form');
-    const successEl  = document.getElementById('form-success');
-    const submitBtn  = document.getElementById('submit-btn');
-
+    /* ── Formspree AJAX ─────────────────────────────────────────────────── */
+    const form      = document.getElementById('offer-form');
+    const successEl = document.getElementById('form-success');
+    const submitBtn = document.getElementById('submit-btn');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
-
-      submitBtn.disabled    = true;
+      submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
-
       try {
         const res = await fetch(form.action, {
-          method:  'POST',
-          body:    new FormData(form),
+          method: 'POST', body: new FormData(form),
           headers: { 'Accept': 'application/json' },
         });
-
         if (res.ok) {
           form.style.display = 'none';
           successEl.classList.add('is-visible');
           successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         } else {
           const data = await res.json().catch(() => ({}));
-          const msg  = data.errors?.map(e => e.message).join(', ')
-            || 'Something went wrong. Please try again or call Holly directly.';
-          alert(msg);
-          submitBtn.disabled    = false;
-          submitBtn.textContent = 'Request an offer';
+          alert(data.errors?.map(e => e.message).join(', ') || 'Something went wrong. Please try again or call Holly directly.');
+          submitBtn.disabled = false; submitBtn.textContent = 'Request an offer';
         }
       } catch {
         alert('Could not submit. Please call or text Holly at 904·206·7479.');
-        submitBtn.disabled    = false;
-        submitBtn.textContent = 'Request an offer';
+        submitBtn.disabled = false; submitBtn.textContent = 'Request an offer';
       }
     });
   </script>
