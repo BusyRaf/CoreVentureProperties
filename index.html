@@ -53,12 +53,6 @@
       background: var(--paper);
     }
 
-    /* ─── Inner content wrapper (constrains content width on desktop) ─────── */
-    .inner {
-      padding-left: var(--gutter);
-      padding-right: var(--gutter);
-    }
-
     /* ─── Type helpers ───────────────────────────────────────────────────── */
     .eyebrow {
       font-family: var(--mono);
@@ -693,10 +687,6 @@
         <p class="offer__hed">Tell Holly<br>about the property.</p>
         <p class="offer__sub">No obligation. No agents. Holly responds personally within 24 hours.</p>
 
-        <!--
-          Formspree: replace YOUR_FORM_ID with your 8-char form ID
-          e.g.  action="https://formspree.io/f/xyzabcde"
-        -->
         <form
           class="form"
           id="offer-form"
@@ -704,7 +694,8 @@
           method="POST"
           novalidate
         >
-          <input type="hidden" name="timeline" id="timeline-value" value="">
+          <input type="hidden" name="timeline"  id="timeline-value" value="">
+          <input type="hidden" name="_subject" value="New offer request — Core Property Ventures">
 
           <div class="field">
             <label class="field__label" for="f-name">Name</label>
@@ -826,6 +817,26 @@
     const submitBtn = document.getElementById('submit-btn');
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
+
+      /* ── Client-side validation ─────────────────────────────────────────── */
+      const nameVal    = document.getElementById('f-name').value.trim();
+      const contactVal = document.getElementById('f-contact').value.trim();
+      const addressVal = document.getElementById('f-address').value.trim();
+      if (!nameVal || !contactVal || !addressVal) {
+        const missing = [];
+        if (!nameVal)    missing.push('Name');
+        if (!contactVal) missing.push('Phone or Email');
+        if (!addressVal) missing.push('Property Address');
+        // Shake the first empty field for a tactile cue
+        const firstEmpty = !nameVal ? '#f-name' : !contactVal ? '#f-contact' : '#f-address';
+        const el = form.querySelector(firstEmpty);
+        el.style.transition = 'border-color .1s ease';
+        el.style.borderBottomColor = '#c0392b';
+        el.focus();
+        setTimeout(() => { el.style.borderBottomColor = ''; }, 1400);
+        return;
+      }
+
       submitBtn.disabled = true;
       submitBtn.textContent = 'Sending…';
       try {
