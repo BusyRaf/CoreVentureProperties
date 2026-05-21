@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Core Property Ventures buys houses as-is, in cash, on your timeline. Jacksonville, FL. Talk directly to Holly.">
+  <title>Core Property Ventures — Cash Home Buyers · Jacksonville, FL</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Design tokens ──────────────────────────────────────────────────── */
+    :root {
+      --ink:       #15182a;
+      --ink-2:     #3a3e52;
+      --ink-3:     #6a6e80;
+      --ink-4:     #b8b6ad;
+      --paper:     #f4f1ea;
+      --paper-2:   #ede9df;
+      --paper-3:   #e3dccc;
+      --navy:      #15233d;
+      --navy-2:    #1d2e4d;
+      --gold:      #c79a44;
+      --gold-soft: #d8b66a;
+
+      --display: "Archivo",      -apple-system, system-ui, sans-serif;
+      --sans:    "Inter",        -apple-system, system-ui, sans-serif;
+      --serif:   "Fraunces",     Georgia, serif;
+      --mono:    "JetBrains Mono", "Courier New", monospace;
+
+      --gutter: 24px;
+      --max-w:  440px;
+    }
+
+    /* ─── Reset ──────────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html  { scroll-behavior: smooth; }
+    body  {
+      background: var(--paper-2);
+      font-family: var(--sans);
+      color: var(--ink);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ─── Page wrapper ───────────────────────────────────────────────────── */
+    .page {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      background: var(--paper);
+    }
+    @media (min-width: 500px) {
+      body  { padding: 48px 16px 80px; }
+      .page { box-shadow: 0 24px 60px rgba(21,24,42,.16), 0 4px 16px rgba(21,24,42,.08); }
+    }
+
+    /* ─── Type helpers ───────────────────────────────────────────────────── */
+    .eyebrow {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: .28em;
+      text-transform: uppercase;
+      font-weight: 500;
+      color: var(--ink-2);
+    }
+    .eyebrow--gold { color: var(--gold); }
+    .eyebrow--navy { color: var(--navy); }
+
+    /* ─── Brand lockup ───────────────────────────────────────────────────── */
+    .lockup {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .lockup__mark {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 1.5px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      flex: 0 0 auto;
+    }
+    .lockup__mark--lg {
+      width: 34px; height: 34px;
+    }
+    .lockup__text {
+      display: flex; flex-direction: column; align-items: flex-start;
+    }
+    .lockup__word {
+      font-family: var(--display);
+      font-weight: 800; font-size: 19px;
+      letter-spacing: -.015em; color: var(--navy); line-height: 1;
+    }
+    .lockup__rule { height: 1px; background: var(--gold); width: 100%; margin-top: 3px; }
+    .lockup__sub  {
+      font-family: var(--mono); font-size: 7px; letter-spacing: .35em;
+      color: var(--navy); margin-top: 3px; text-transform: uppercase;
+    }
+
+    /* Standalone brick mark (section headers) */
+    .brick-mark {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--navy);
+      border: 1.5px solid var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      flex: 0 0 auto;
+    }
+
+    /* ─── Nav ────────────────────────────────────────────────────────────── */
+    .nav {
+      padding: 16px var(--gutter);
+      border-bottom: 1px solid var(--gold);
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0;
+      background: var(--paper);
+      z-index: 100;
+      transition: box-shadow .25s ease;
+    }
+    .nav.is-scrolled { box-shadow: 0 2px 18px rgba(21,24,42,.10); }
+
+    .nav-location {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: .2em; text-transform: uppercase; color: var(--navy);
+    }
+
+    /* ─── Hero ───────────────────────────────────────────────────────────── */
+    .hero { padding: 52px var(--gutter) 0; }
+
+    .hero__eyebrow  { animation: fadeUp .5s ease .05s both; }
+    .hero__headline { animation: fadeUp .65s ease .18s both; }
+    .hero__rule     { animation: fadeUp .5s ease .3s both; }
+    .hero__body     { animation: fadeUp .55s ease .38s both; }
+    .hero__cta      { animation: fadeUp .5s ease .5s both; }
+
+    .hero__headline {
+      font-family: var(--serif);
+      font-size: 52px; font-weight: 400;
+      color: var(--navy); line-height: .97; letter-spacing: -.02em;
+      margin-top: 16px;
+    }
+    .hero__headline em { font-style: italic; color: var(--ink); font-weight: 400; }
+
+    .hero__rule { width: 80px; height: 1px; background: var(--gold); margin-top: 22px; }
+
+    .hero__body {
+      font-size: 15px; line-height: 1.62; color: var(--ink-2);
+      margin-top: 16px; max-width: 340px;
+    }
+    .hero__cta { margin-top: 28px; }
+
+    /* ─── Buttons ────────────────────────────────────────────────────────── */
+    .btn-outline {
+      display: inline-flex; align-items: center; justify-content: center;
+      color: var(--navy);
+      font-family: var(--display); font-size: 11px;
+      letter-spacing: .2em; text-transform: uppercase; font-weight: 600;
+      text-decoration: none; padding: 17px 28px;
+      border: 1.5px solid var(--navy);
+      position: relative;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn-outline::after {
+      content: ""; position: absolute; inset: 5px;
+      border: 1px solid var(--navy); pointer-events: none;
+    }
+    .btn-outline:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(21,35,61,.12);
+    }
+    .btn-outline:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 100%;
+      background: var(--navy); color: var(--paper);
+      border: 1.5px solid var(--navy);
+      font-family: var(--display); font-size: 12px;
+      letter-spacing: .2em; text-transform: uppercase; font-weight: 600;
+      padding: 18px 24px; cursor: pointer;
+      position: relative;
+      transition: transform .15s ease, box-shadow .15s ease;
+    }
+    .btn-primary::after {
+      content: ""; position: absolute; inset: 5px;
+      border: 1px solid var(--gold); pointer-events: none;
+      transition: inset .15s ease;
+    }
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(21,35,61,.2);
+    }
+    .btn-primary:hover::after { inset: 4px; }
+    .btn-primary:active { transform: none; box-shadow: none; }
+    .btn-primary:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+    .btn-primary:disabled { opacity: .6; cursor: default; transform: none; box-shadow: none; }
+
+    /* ─── Section header ─────────────────────────────────────────────────── */
+    .section-header {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .section-header__rule { flex: 1; height: 1px; background: var(--navy); }
+
+    /* ─── Owner block ────────────────────────────────────────────────────── */
+    .owner { padding: 52px var(--gutter) 0; }
+
+    .owner__head { display: flex; gap: 18px; align-items: center; }
+
+    .owner__photo {
+      width: 90px; height: 108px;
+      border: 1px solid var(--gold);
+      overflow: hidden; flex: 0 0 90px;
+      background: var(--paper-2);
+    }
+    .owner__photo img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      /* subtle desaturation for print-editorial feel */
+      filter: saturate(.88) contrast(1.04);
+      transition: filter .3s ease;
+    }
+    .owner__photo:hover img { filter: saturate(1) contrast(1); }
+
+    .owner__meta     { flex: 1; }
+    .owner__name     {
+      font-family: var(--serif); font-size: 26px; font-weight: 500;
+      color: var(--navy); line-height: 1; margin-top: 4px;
+    }
+    .owner__title    {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: .2em; color: var(--ink-2); text-transform: uppercase; margin-top: 6px;
+    }
+    .owner__accent   { width: 40px; height: 1px; background: var(--gold); margin-top: 10px; }
+
+    .owner__quote {
+      font-family: var(--serif); font-size: 16.5px; line-height: 1.6;
+      color: var(--ink-2); font-style: italic; margin-top: 22px;
+    }
+
+    /* ─── Process ────────────────────────────────────────────────────────── */
+    .process { padding: 60px var(--gutter) 0; }
+
+    .process__steps  { margin-top: 22px; list-style: none; }
+
+    .process__step {
+      display: flex; gap: 20px; padding: 22px 0;
+      border-top: 1px solid var(--ink);
+    }
+    .process__step + .process__step { border-top-color: var(--ink-4); }
+
+    .process__num {
+      font-family: var(--serif); font-size: 40px; font-weight: 400;
+      font-style: italic; color: var(--gold); line-height: 1;
+      width: 46px; flex: 0 0 46px;
+    }
+    .process__body { flex: 1; padding-top: 6px; }
+    .process__title {
+      font-family: var(--serif); font-size: 20px; font-weight: 600;
+      color: var(--navy); line-height: 1.2;
+    }
+    .process__desc {
+      font-size: 13.5px; color: var(--ink-2); margin-top: 7px; line-height: 1.56;
+    }
+    .process__foot { height: 1px; background: var(--ink-4); }
+
+    /* ─── As-is panel ────────────────────────────────────────────────────── */
+    .as-is { padding: 52px var(--gutter) 0; }
+
+    .as-is__card {
+      background: var(--navy); color: var(--paper);
+      padding: 28px 24px 32px; position: relative;
+    }
+    .as-is__inlay {
+      position: absolute; inset: 6px;
+      border: 1px solid var(--gold); pointer-events: none;
+    }
+    .as-is__inner { position: relative; }
+
+    .as-is__headline {
+      font-family: var(--serif); font-size: 23px; font-weight: 500;
+      color: var(--paper); margin-top: 8px;
+    }
+    .as-is__bullets {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px 20px; margin-top: 20px; list-style: none;
+    }
+    .as-is__bullet {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14.5px; font-family: var(--sans);
+    }
+    .as-is__dot {
+      width: 6px; height: 6px; background: var(--gold);
+      border-radius: 50%; flex: 0 0 6px;
+    }
+    .as-is__sub {
+      font-size: 13px; color: rgba(244,241,234,.72);
+      line-height: 1.58; margin-top: 20px;
+    }
+
+    /* ─── Offer / form ───────────────────────────────────────────────────── */
+    .offer { padding: 60px var(--gutter) 0; }
+
+    .offer__hed {
+      font-family: var(--serif); font-size: 34px; font-weight: 500;
+      color: var(--navy); line-height: 1.04; letter-spacing: -.02em;
+      margin-top: 22px;
+    }
+    .offer__sub {
+      font-size: 13.5px; color: var(--ink-2); margin-top: 10px; line-height: 1.58;
+    }
+
+    .form { margin-top: 28px; display: flex; flex-direction: column; gap: 26px; }
+
+    .field        { display: flex; flex-direction: column; gap: 5px; }
+    .field__label {
+      font-family: var(--mono); font-size: 9.5px;
+      letter-spacing: .25em; text-transform: uppercase; color: var(--navy);
+    }
+    .field__input {
+      border: none; border-bottom: 1.5px solid var(--ink-4);
+      background: transparent;
+      font-family: var(--sans); font-size: 15px;
+      padding: 9px 0 8px; width: 100%; outline: none;
+      color: var(--ink);
+      transition: border-color .2s ease;
+      -webkit-appearance: none; appearance: none;
+    }
+    .field__input::placeholder { color: var(--ink-4); font-style: italic; }
+    .field__input:focus        { border-bottom-color: var(--navy); }
+    .field__input:hover:not(:focus) { border-bottom-color: var(--ink-3); }
+
+    /* Timeline chips */
+    .chips { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 4px; }
+
+    .chip {
+      border: 1px solid var(--navy);
+      padding: 8px 12px; font-size: 12px;
+      font-family: var(--sans); color: var(--navy);
+      letter-spacing: .02em; cursor: pointer;
+      background: transparent;
+      transition: background .15s ease, color .15s ease;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .chip:hover:not(.is-active) { background: var(--paper-3); }
+    .chip.is-active { background: var(--navy); color: var(--paper); }
+    .chip:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+    .form__note {
+      font-size: 12px; color: var(--ink-3);
+      text-align: center; line-height: 1.6; margin-top: -8px;
+    }
+    .form__note a { color: var(--navy); font-weight: 600; text-decoration: none; }
+    .form__note a:hover { text-decoration: underline; }
+
+    /* Success state */
+    .form__success {
+      display: none; text-align: center; padding: 40px 0;
+    }
+    .form__success.is-visible { display: block; }
+    .form__success-mark {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 48px; height: 48px;
+      border-radius: 50%; background: var(--navy);
+      border: 1.5px solid var(--gold); margin-bottom: 16px;
+    }
+    .form__success-hed  {
+      font-family: var(--serif); font-size: 26px; color: var(--navy); margin-bottom: 10px;
+    }
+    .form__success-body {
+      font-size: 14px; color: var(--ink-2); line-height: 1.65;
+    }
+    .form__success-body a { color: var(--navy); font-weight: 600; text-decoration: none; }
+
+    /* ─── Footer ─────────────────────────────────────────────────────────── */
+    footer { padding: 44px var(--gutter) 48px; margin-top: 52px; }
+
+    .footer__rule  { height: 1px; background: var(--gold); margin-bottom: 20px; }
+    .footer__inner { display: flex; justify-content: space-between; align-items: flex-end; }
+    .footer__right { text-align: right; }
+    .footer__email {
+      font-family: var(--mono); font-size: 9px;
+      letter-spacing: .14em; color: var(--ink-3); text-transform: uppercase;
+      text-decoration: none; display: block; margin-top: 6px;
+      transition: color .15s ease;
+    }
+    .footer__email:hover { color: var(--navy); }
+
+    /* ─── Scroll-reveal ──────────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .65s ease, transform .65s ease;
+    }
+    .reveal.is-visible { opacity: 1; transform: none; }
+
+    /* Hero entrance (CSS-driven, no JS needed) */
+    .nav { animation: slideDown .4s ease both; }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-6px); }
+      to   { opacity: 1; transform: none; }
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ─── Focus polish ───────────────────────────────────────────────────── */
+    :focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <!-- ── Nav ────────────────────────────────────────────────────────────── -->
+    <nav class="nav" id="nav" aria-label="Site navigation">
+      <a href="#" class="lockup" aria-label="Core Property Ventures">
+        <div class="lockup__mark" aria-hidden="true">
+          <svg viewBox="0 0 24 16" width="17" height="11" aria-hidden="true">
+            <rect x="0"  y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="6"  y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="12" y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="18" y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="3"  y="6"  width="5" height="4" fill="var(--gold)" />
+            <rect x="9"  y="6"  width="5" height="4" fill="var(--gold)" />
+            <rect x="15" y="6"  width="5" height="4" fill="var(--gold)" />
+            <rect x="6"  y="1"  width="5" height="4" fill="var(--gold)" />
+            <rect x="12" y="1"  width="5" height="4" fill="var(--gold)" />
+          </svg>
+        </div>
+        <div class="lockup__text">
+          <span class="lockup__word">CORE</span>
+          <div class="lockup__rule"></div>
+          <div class="lockup__sub">Property · Ventures</div>
+        </div>
+      </a>
+      <span class="nav-location" aria-label="Location: Jacksonville, Florida">Jacksonville · FL</span>
+    </nav>
+
+    <!-- ── Hero ───────────────────────────────────────────────────────────── -->
+    <section class="hero" aria-labelledby="hero-hed">
+      <p class="eyebrow eyebrow--gold hero__eyebrow">A Letter From the Owner · 2026</p>
+      <h1 class="hero__headline" id="hero-hed">
+        We buy houses<br>
+        <em>as&#8209;is</em>,<br>
+        in cash,<br>
+        on your timeline.
+      </h1>
+      <div class="hero__rule" aria-hidden="true"></div>
+      <p class="hero__body">
+        Core Property Ventures is actively purchasing homes throughout Jacksonville
+        and the surrounding areas — direct from owners, no agents, no fees.
+      </p>
+      <div class="hero__cta">
+        <a href="#offer" class="btn-outline">Request an offer</a>
+      </div>
+    </section>
+
+    <!-- ── Owner block ─────────────────────────────────────────────────────── -->
+    <section class="owner reveal" aria-labelledby="owner-name">
+      <div class="owner__head">
+        <div class="owner__photo">
+          <img src="assets/holly.jpg" alt="Holly McNally, owner of Core Property Ventures, smiling">
+        </div>
+        <div class="owner__meta">
+          <p class="eyebrow eyebrow--navy">Your Direct Contact</p>
+          <h2 class="owner__name" id="owner-name">Holly McNally</h2>
+          <p class="owner__title">Owner · Core PV</p>
+          <div class="owner__accent" aria-hidden="true"></div>
+        </div>
+      </div>
+      <blockquote class="owner__quote">
+        &ldquo;If you&rsquo;ve considered selling — or are simply curious what your
+        property may be worth — I&rsquo;d love to have a quick, no&#8209;obligation
+        conversation. I&rsquo;m not an agent. I buy directly, pay cash, and work
+        on your timeline.&rdquo;
+      </blockquote>
+    </section>
+
+    <!-- ── The Process ─────────────────────────────────────────────────────── -->
+    <section class="process reveal" aria-labelledby="process-hed">
+      <div class="section-header">
+        <div class="brick-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 16" width="21" height="14" aria-hidden="true">
+            <rect x="0"  y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="6"  y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="12" y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="18" y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="3"  y="6"  width="5" height="4" fill="var(--gold)" />
+            <rect x="9"  y="6"  width="5" height="4" fill="var(--gold)" />
+            <rect x="15" y="6"  width="5" height="4" fill="var(--gold)" />
+            <rect x="6"  y="1"  width="5" height="4" fill="var(--gold)" />
+            <rect x="12" y="1"  width="5" height="4" fill="var(--gold)" />
+          </svg>
+        </div>
+        <div class="section-header__rule" aria-hidden="true"></div>
+        <h2 class="eyebrow eyebrow--navy" id="process-hed">The Process</h2>
+      </div>
+
+      <ol class="process__steps">
+        <li class="process__step">
+          <span class="process__num" aria-hidden="true">I</span>
+          <div class="process__body">
+            <h3 class="process__title">You tell us about the property</h3>
+            <p class="process__desc">A few details — address, condition, your situation. Two minutes.</p>
+          </div>
+        </li>
+        <li class="process__step">
+          <span class="process__num" aria-hidden="true">II</span>
+          <div class="process__body">
+            <h3 class="process__title">A brief conversation</h3>
+            <p class="process__desc">Holly responds within 24 hours. Honest, no script, no pressure.</p>
+          </div>
+        </li>
+        <li class="process__step">
+          <span class="process__num" aria-hidden="true">III</span>
+          <div class="process__body">
+            <h3 class="process__title">A fair cash offer</h3>
+            <p class="process__desc">Direct from us. Clean title, your timeline. We can close in 7–21 days.</p>
+          </div>
+        </li>
+      </ol>
+      <div class="process__foot" aria-hidden="true"></div>
+    </section>
+
+    <!-- ── As-is panel ─────────────────────────────────────────────────────── -->
+    <section class="as-is reveal" aria-label="We purchase as-is">
+      <div class="as-is__card">
+        <div class="as-is__inlay" aria-hidden="true"></div>
+        <div class="as-is__inner">
+          <p class="eyebrow eyebrow--gold">We Purchase As&#8209;Is</p>
+          <h2 class="as-is__headline">Which means, simply:</h2>
+          <ul class="as-is__bullets">
+            <li class="as-is__bullet">
+              <span class="as-is__dot" aria-hidden="true"></span>No repairs
+            </li>
+            <li class="as-is__bullet">
+              <span class="as-is__dot" aria-hidden="true"></span>No cleaning
+            </li>
+            <li class="as-is__bullet">
+              <span class="as-is__dot" aria-hidden="true"></span>No renovations
+            </li>
+            <li class="as-is__bullet">
+              <span class="as-is__dot" aria-hidden="true"></span>No commissions
+            </li>
+          </ul>
+          <p class="as-is__sub">
+            Inherited, tenant&#8209;occupied, vacant, or in need of work — all welcome.
+            All we need is a clean title.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Request an offer ────────────────────────────────────────────────── -->
+    <section class="offer reveal" id="offer" aria-labelledby="offer-hed">
+      <div class="section-header">
+        <div class="brick-mark" aria-hidden="true">
+          <svg viewBox="0 0 24 16" width="21" height="14" aria-hidden="true">
+            <rect x="0"  y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="6"  y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="12" y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="18" y="11" width="5" height="4" fill="var(--gold)" />
+            <rect x="3"  y="6"  width="5" height="4" fill="var(--gold)" />
+            <rect x="9"  y="6"  width="5" height="4" fill="var(--gold)" />
+            <rect x="15" y="6"  width="5" height="4" fill="var(--gold)" />
+            <rect x="6"  y="1"  width="5" height="4" fill="var(--gold)" />
+            <rect x="12" y="1"  width="5" height="4" fill="var(--gold)" />
+          </svg>
+        </div>
+        <div class="section-header__rule" aria-hidden="true"></div>
+        <h2 class="eyebrow eyebrow--navy" id="offer-hed">Request an Offer</h2>
+      </div>
+
+      <p class="offer__hed">Tell Holly<br>about the property.</p>
+      <p class="offer__sub">No obligation. No agents. Holly responds personally within 24 hours.</p>
+
+      <!--
+        Formspree setup:
+          1. Create a free account at formspree.io
+          2. Create a new form — copy the form ID (looks like "xyzabcde")
+          3. Replace YOUR_FORM_ID below with that ID
+          e.g.  action="https://formspree.io/f/xyzabcde"
+      -->
+      <form
+        class="form"
+        id="offer-form"
+        action="https://formspree.io/f/YOUR_FORM_ID"
+        method="POST"
+        novalidate
+      >
+        <!-- Hidden: timeline choice populated by chip selection -->
+        <input type="hidden" name="timeline" id="timeline-value" value="">
+
+        <div class="field">
+          <label class="field__label" for="f-name">Name</label>
+          <input
+            class="field__input"
+            type="text"
+            id="f-name"
+            name="name"
+            placeholder="Your full name"
+            autocomplete="name"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="f-contact">Phone or Email</label>
+          <input
+            class="field__input"
+            type="text"
+            id="f-contact"
+            name="contact"
+            placeholder="Best way to reach you"
+            autocomplete="email"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <label class="field__label" for="f-address">Property Address</label>
+          <input
+            class="field__input"
+            type="text"
+            id="f-address"
+            name="address"
+            placeholder="Street, city, ZIP"
+            autocomplete="street-address"
+            required
+          >
+        </div>
+
+        <div class="field">
+          <p class="field__label" id="timeline-label">Timeline</p>
+          <div class="chips" role="group" aria-labelledby="timeline-label">
+            <button type="button" class="chip" data-value="As soon as possible">As soon as possible</button>
+            <button type="button" class="chip" data-value="30 days">30 days</button>
+            <button type="button" class="chip" data-value="60–90 days">60–90 days</button>
+            <button type="button" class="chip" data-value="Just curious">Just curious</button>
+          </div>
+        </div>
+
+        <button type="submit" class="btn-primary" id="submit-btn">Request an offer</button>
+
+        <p class="form__note">
+          Prefer to talk? Call or text Holly directly at&nbsp;<a href="tel:9042067479">904&thinsp;·&thinsp;206&thinsp;·&thinsp;7479</a>
+        </p>
+      </form>
+
+      <!-- Success state shown after submission -->
+      <div class="form__success" id="form-success" role="alert" aria-live="polite">
+        <div class="form__success-mark" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <path d="M4 10.5L8.5 15L16 6" stroke="var(--gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <h3 class="form__success-hed">We've got your request.</h3>
+        <p class="form__success-body">
+          Holly will be in touch personally within 24 hours.<br>
+          You can also reach her directly at<br>
+          <a href="tel:9042067479">904&thinsp;·&thinsp;206&thinsp;·&thinsp;7479</a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Footer ──────────────────────────────────────────────────────────── -->
+    <footer>
+      <div class="footer__rule" aria-hidden="true"></div>
+      <div class="footer__inner">
+        <a href="#" class="lockup" aria-label="Core Property Ventures">
+          <div class="lockup__mark" aria-hidden="true">
+            <svg viewBox="0 0 24 16" width="17" height="11" aria-hidden="true">
+              <rect x="0"  y="11" width="5" height="4" fill="var(--gold)" />
+              <rect x="6"  y="11" width="5" height="4" fill="var(--gold)" />
+              <rect x="12" y="11" width="5" height="4" fill="var(--gold)" />
+              <rect x="18" y="11" width="5" height="4" fill="var(--gold)" />
+              <rect x="3"  y="6"  width="5" height="4" fill="var(--gold)" />
+              <rect x="9"  y="6"  width="5" height="4" fill="var(--gold)" />
+              <rect x="15" y="6"  width="5" height="4" fill="var(--gold)" />
+              <rect x="6"  y="1"  width="5" height="4" fill="var(--gold)" />
+              <rect x="12" y="1"  width="5" height="4" fill="var(--gold)" />
+            </svg>
+          </div>
+          <div class="lockup__text">
+            <span class="lockup__word">CORE</span>
+            <div class="lockup__rule"></div>
+            <div class="lockup__sub">Property · Ventures</div>
+          </div>
+        </a>
+        <div class="footer__right">
+          <p class="eyebrow">Core PV · Jax FL</p>
+          <a href="mailto:holly@corepropertyventures.com" class="footer__email">
+            holly@corepropertyventures.com
+          </a>
+        </div>
+      </div>
+    </footer>
+
+  </div><!-- /.page -->
+
+  <script>
+    /* ── Scroll-reveal (IntersectionObserver) ───────────────────────────── */
+    const revealEls = document.querySelectorAll('.reveal');
+    const observer  = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.07, rootMargin: '0px 0px -40px 0px' });
+    revealEls.forEach(el => observer.observe(el));
+
+    /* ── Nav shadow on scroll ────────────────────────────────────────────── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('is-scrolled', window.scrollY > 8);
+    }, { passive: true });
+
+    /* ── Timeline chip selection ─────────────────────────────────────────── */
+    const chips          = document.querySelectorAll('.chip');
+    const timelineInput  = document.getElementById('timeline-value');
+
+    chips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        const wasActive = chip.classList.contains('is-active');
+        chips.forEach(c => c.classList.remove('is-active'));
+        if (!wasActive) {
+          chip.classList.add('is-active');
+          timelineInput.value = chip.dataset.value;
+        } else {
+          timelineInput.value = '';
+        }
+      });
+    });
+
+    /* ── Form: AJAX submit to Formspree ──────────────────────────────────── */
+    const form       = document.getElementById('offer-form');
+    const successEl  = document.getElementById('form-success');
+    const submitBtn  = document.getElementById('submit-btn');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      submitBtn.disabled    = true;
+      submitBtn.textContent = 'Sending…';
+
+      try {
+        const res = await fetch(form.action, {
+          method:  'POST',
+          body:    new FormData(form),
+          headers: { 'Accept': 'application/json' },
+        });
+
+        if (res.ok) {
+          form.style.display = 'none';
+          successEl.classList.add('is-visible');
+          successEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        } else {
+          const data = await res.json().catch(() => ({}));
+          const msg  = data.errors?.map(e => e.message).join(', ')
+            || 'Something went wrong. Please try again or call Holly directly.';
+          alert(msg);
+          submitBtn.disabled    = false;
+          submitBtn.textContent = 'Request an offer';
+        }
+      } catch {
+        alert('Could not submit. Please call or text Holly at 904·206·7479.');
+        submitBtn.disabled    = false;
+        submitBtn.textContent = 'Request an offer';
+      }
+    });
+  </script>
+</body>
+</html>

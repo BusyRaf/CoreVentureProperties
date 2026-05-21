@@ -1,0 +1,210 @@
+/* Core Property Ventures — Brand-aware wireframe styles
+   Boutique real-estate. Navy + gold + cream paper. Editorial.
+   Low-fi enough to read as wireframe; on-brand enough to read as Core PV. */
+
+:root {
+  --ink: #15182a;
+  --ink-2: #3a3e52;
+  --ink-3: #6a6e80;
+  --ink-4: #b8b6ad;
+  --paper: #f4f1ea;
+  --paper-2: #ede9df;
+  --paper-3: #e3dccc;
+  --navy: #15233d;      /* logo navy */
+  --navy-2: #1d2e4d;
+  --gold: #c79a44;      /* logo gold */
+  --gold-soft: #d8b66a;
+
+  --rule: var(--ink);
+
+  --display: "Archivo", "Inter", -apple-system, system-ui, sans-serif;
+  --sans: "Inter", -apple-system, system-ui, sans-serif;
+  --serif: "Fraunces", "EB Garamond", Georgia, serif;
+  --type: "JetBrains Mono", "Courier Prime", ui-monospace, monospace;
+}
+
+/* ───── Wireframe primitives ───── */
+.wf-rule       { height: 1px; background: var(--ink); width: 100%; }
+.wf-rule-gold  { height: 1px; background: var(--gold); width: 100%; }
+.wf-rule-thick { height: 2px; background: var(--ink); width: 100%; }
+.wf-rule-dashed{ border-top: 1px dashed var(--ink); width: 100%; height: 0; }
+
+/* Placeholder image box: crossed rectangle, monospace label */
+.wf-imgbox {
+  position: relative;
+  background:
+    repeating-linear-gradient(135deg, transparent 0 6px, rgba(21,24,42,.07) 6px 7px),
+    var(--paper-2);
+  border: 1px solid var(--ink);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--type); font-size: 9px; letter-spacing: .15em;
+  color: var(--ink-2); text-transform: uppercase;
+}
+.wf-imgbox::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    linear-gradient(to top right, transparent calc(50% - 0.4px), var(--ink) 50%, transparent calc(50% + 0.4px)),
+    linear-gradient(to top left,  transparent calc(50% - 0.4px), var(--ink) 50%, transparent calc(50% + 0.4px));
+  opacity: .3;
+}
+.wf-imgbox > * { position: relative; z-index: 1; background: var(--paper); padding: 2px 6px; }
+
+/* Form field */
+.wf-field {
+  border: none;
+  border-bottom: 1.5px solid var(--ink);
+  background: transparent;
+  font-family: var(--sans); font-size: 13.5px;
+  padding: 8px 0 6px;
+  width: 100%; outline: none;
+  color: var(--ink); letter-spacing: 0;
+}
+.wf-field::placeholder {
+  font-family: var(--sans);
+  font-size: 13.5px;
+  color: var(--ink-3);
+  font-style: italic;
+}
+
+/* Button */
+.wf-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 1.5px solid var(--navy); background: var(--navy); color: var(--paper);
+  font-family: var(--display);
+  font-size: 11.5px; letter-spacing: .18em;
+  text-transform: uppercase; font-weight: 600;
+  padding: 16px 22px; cursor: pointer;
+  position: relative;
+}
+.wf-btn::after {
+  content: ""; position: absolute; inset: 4px;
+  border: 1px solid var(--gold); pointer-events: none;
+}
+.wf-btn-ghost {
+  background: transparent; color: var(--navy);
+}
+.wf-btn-ghost::after { border-color: var(--navy); }
+
+/* Eyebrow */
+.wf-eyebrow {
+  font-family: var(--type);
+  font-size: 10px;
+  letter-spacing: .25em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  font-weight: 500;
+}
+.wf-eyebrow-gold { color: var(--gold); }
+.wf-eyebrow-navy { color: var(--navy); }
+
+/* Display headline */
+.wf-display {
+  font-family: var(--display);
+  font-weight: 800;
+  letter-spacing: -.025em;
+  line-height: .95;
+  color: var(--navy);
+}
+
+/* Editorial serif headline */
+.wf-serif {
+  font-family: var(--serif);
+  letter-spacing: -.015em;
+}
+
+/* Annotation in margin (subtle wireframe tell) */
+.wf-annot {
+  font-family: var(--type);
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+/* Stamp / pill */
+.wf-stamp {
+  font-family: var(--type);
+  font-size: 9px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  padding: 5px 9px;
+  display: inline-block;
+}
+
+/* ───── Brick mark (mirrors logo) ─────
+   A navy circle with stacked gold "bricks" inside.
+   .brick-bar > .brick = one row; rows alternate masonry pattern. */
+.brick-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  background: var(--navy);
+  border: 1.5px solid var(--gold);
+  padding: 0;
+  position: relative;
+  flex: 0 0 auto;
+}
+.brick-mark .bricks {
+  display: grid;
+  gap: 1.5px;
+  grid-auto-rows: 1fr;
+  width: 55%; height: 38%;
+}
+.brick-mark .brick-row {
+  display: grid; gap: 1.5px;
+  grid-template-columns: repeat(var(--bcols, 4), 1fr);
+}
+.brick-mark .brick-row.offset {
+  grid-template-columns: 0.5fr repeat(3, 1fr) 0.5fr;
+}
+.brick-mark .brick {
+  background: var(--gold);
+  border-radius: 0.5px;
+}
+
+/* Faint brick lattice (used for background motif) */
+.brick-lattice {
+  background-image:
+    linear-gradient(to right, rgba(21,35,61,.18) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(21,35,61,.18) 1px, transparent 1px);
+  background-size: 32px 16px;
+}
+
+/* Layout helpers */
+.wf-row { display: flex; }
+.wf-col { display: flex; flex-direction: column; }
+.wf-gap-1 { gap: 4px; } .wf-gap-2 { gap: 8px; } .wf-gap-3 { gap: 12px; }
+.wf-gap-4 { gap: 16px; } .wf-gap-6 { gap: 24px; } .wf-gap-8 { gap: 32px; }
+
+/* Page shell */
+.wf-page {
+  width: 100%; height: 100%;
+  background: var(--paper);
+  font-family: var(--sans);
+  color: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Tiny logo lockup (typeset, no image) */
+.wf-lockup {
+  display: inline-flex; flex-direction: column; align-items: center;
+}
+.wf-lockup .word {
+  font-family: var(--display);
+  font-weight: 800;
+  font-size: 22px;
+  letter-spacing: -.01em;
+  color: var(--navy);
+  line-height: 1;
+}
+.wf-lockup .sub {
+  font-family: var(--type);
+  font-size: 8.5px;
+  letter-spacing: .35em;
+  color: var(--navy);
+  margin-top: 5px;
+}
+.wf-lockup .gold-rule {
+  height: 1px; background: var(--gold); width: 100%; margin: 4px 0 0;
+}
