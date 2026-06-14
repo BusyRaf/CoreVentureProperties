@@ -6,6 +6,9 @@
   <meta name="description" content="Core Property Ventures buys houses as-is, in cash, on your timeline. Jacksonville, FL. Talk directly to Holly.">
   <title>Core Property Ventures — Cash Home Buyers · Jacksonville, FL</title>
 
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,300;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -65,33 +68,11 @@
     .eyebrow--gold { color: var(--gold); }
     .eyebrow--navy { color: var(--navy); }
 
-    /* ─── Brand lockup ───────────────────────────────────────────────────── */
-    .lockup {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      text-decoration: none;
-    }
-    .lockup__mark {
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: var(--navy);
-      border: 1.5px solid var(--gold);
-      display: flex; align-items: center; justify-content: center;
-      flex: 0 0 auto;
-    }
-    .lockup__text {
-      display: flex; flex-direction: column; align-items: flex-start;
-    }
-    .lockup__word {
-      font-family: var(--display);
-      font-weight: 800; font-size: 19px;
-      letter-spacing: -.015em; color: var(--navy); line-height: 1;
-    }
-    .lockup__rule { height: 1px; background: var(--gold); width: 100%; margin-top: 3px; }
-    .lockup__sub  {
-      font-family: var(--mono); font-size: 7px; letter-spacing: .35em;
-      color: var(--navy); margin-top: 3px; text-transform: uppercase;
+    /* ─── Brand logo (PNG) ───────────────────────────────────────────────── */
+    .nav-logo {
+      height: 36px;
+      width: auto;
+      display: block;
     }
 
     /* Standalone brick mark (section headers) */
@@ -150,7 +131,13 @@
       font-size: 15px; line-height: 1.62; color: var(--ink-2);
       margin-top: 16px;
     }
-    .hero__cta { margin-top: 28px; }
+    .hero__cta {
+      margin-top: 28px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+    }
 
     /* ─── Buttons ────────────────────────────────────────────────────────── */
     .btn-outline {
@@ -413,11 +400,7 @@
         margin: 0 auto;
       }
 
-      /* Slightly larger lockup on desktop */
-      .lockup__word  { font-size: 22px; }
-      .lockup__mark  { width: 34px; height: 34px; }
-      .lockup__mark svg { width: 20px; height: 14px; }
-      .lockup__sub   { font-size: 8px; }
+      .nav-logo { height: 44px; }
       .nav { padding: 20px var(--gutter); }
 
       /* ── Hero: large headline left, nothing changes structurally
@@ -473,7 +456,6 @@
       .process__steps {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        border-top: 1px solid var(--ink);
         margin-top: 28px;
       }
 
@@ -499,7 +481,7 @@
       .as-is__card  { padding: 44px 48px 48px; }
       .as-is__headline { font-size: 28px; }
       .as-is__bullets {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(3, 1fr);
         margin-top: 24px;
         gap: 0 24px;
       }
@@ -526,6 +508,36 @@
         box-shadow: 0 24px 80px rgba(21,24,42,.10), 0 4px 16px rgba(21,24,42,.06);
       }
     }
+
+    /* ─── Testimonial ────────────────────────────────────────────────────── */
+    .testimonial {
+      padding: var(--section-gap) var(--gutter) 0;
+    }
+    .testimonial__inner {
+      max-width: 640px;
+      margin: 0 auto;
+      border-left: 3px solid var(--gold);
+      padding-left: 24px;
+    }
+    .testimonial blockquote {
+      font-family: var(--serif);
+      font-size: 20px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink-2);
+      line-height: 1.6;
+    }
+    .testimonial__attribution {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--ink-3);
+      margin-top: 16px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body>
@@ -533,32 +545,15 @@
 
     <!-- ── Nav ───────────────────────────────────────────────────────────── -->
     <nav class="nav" id="nav" aria-label="Site navigation">
-      <a href="#" class="lockup" aria-label="Core Property Ventures">
-        <div class="lockup__mark" aria-hidden="true">
-          <svg viewBox="0 0 24 16" width="17" height="11">
-            <rect x="0"  y="11" width="5" height="4" fill="var(--gold)" />
-            <rect x="6"  y="11" width="5" height="4" fill="var(--gold)" />
-            <rect x="12" y="11" width="5" height="4" fill="var(--gold)" />
-            <rect x="18" y="11" width="5" height="4" fill="var(--gold)" />
-            <rect x="3"  y="6"  width="5" height="4" fill="var(--gold)" />
-            <rect x="9"  y="6"  width="5" height="4" fill="var(--gold)" />
-            <rect x="15" y="6"  width="5" height="4" fill="var(--gold)" />
-            <rect x="6"  y="1"  width="5" height="4" fill="var(--gold)" />
-            <rect x="12" y="1"  width="5" height="4" fill="var(--gold)" />
-          </svg>
-        </div>
-        <div class="lockup__text">
-          <span class="lockup__word">CORE</span>
-          <div class="lockup__rule"></div>
-          <div class="lockup__sub">Property · Ventures</div>
-        </div>
+      <a href="#" aria-label="Core Property Ventures">
+        <img src="assets/logo.png" alt="Core Property Ventures" class="nav-logo">
       </a>
       <span class="nav-location" aria-label="Location: Jacksonville, Florida">Jacksonville · FL</span>
     </nav>
 
     <!-- ── Hero ──────────────────────────────────────────────────────────── -->
     <section class="hero" aria-labelledby="hero-hed">
-      <p class="eyebrow eyebrow--gold hero__eyebrow">A Letter From the Owner · 2026</p>
+      <p class="eyebrow eyebrow--gold hero__eyebrow">Serving Jacksonville &amp; Surrounding Areas</p>
       <h1 class="hero__headline" id="hero-hed">
         We buy houses<br>
         <em>as&#8209;is</em>,<br>
@@ -568,10 +563,11 @@
       <div class="hero__rule" aria-hidden="true"></div>
       <p class="hero__body">
         Core Property Ventures is actively purchasing homes throughout Jacksonville
-        and the surrounding areas — direct from owners, no agents, no fees.
+        and the surrounding areas — direct from owners. No agents. No hassles. Just a fair cash offer.
       </p>
       <div class="hero__cta">
         <a href="#offer" class="btn-outline">Request an offer</a>
+        <a href="tel:9042067479" class="btn-outline">Call or text Holly &middot; 904&thinsp;&middot;&thinsp;206&thinsp;&middot;&thinsp;7479</a>
       </div>
     </section>
 
@@ -588,7 +584,7 @@
         <div class="owner__meta">
           <p class="eyebrow eyebrow--navy">Your Direct Contact</p>
           <h2 class="owner__name" id="owner-name">Holly McNally</h2>
-          <p class="owner__title">Owner · Core PV</p>
+          <p class="owner__title">Owner · Jacksonville local, 15+ years</p>
           <div class="owner__accent" aria-hidden="true"></div>
         </div>
       </div>
@@ -608,16 +604,13 @@
     <section class="process reveal" aria-labelledby="process-hed">
       <div class="section-header">
         <div class="brick-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 16" width="21" height="14">
-            <rect x="0"  y="11" width="5" height="4" fill="var(--gold)" />
-            <rect x="6"  y="11" width="5" height="4" fill="var(--gold)" />
-            <rect x="12" y="11" width="5" height="4" fill="var(--gold)" />
-            <rect x="18" y="11" width="5" height="4" fill="var(--gold)" />
-            <rect x="3"  y="6"  width="5" height="4" fill="var(--gold)" />
-            <rect x="9"  y="6"  width="5" height="4" fill="var(--gold)" />
-            <rect x="15" y="6"  width="5" height="4" fill="var(--gold)" />
-            <rect x="6"  y="1"  width="5" height="4" fill="var(--gold)" />
-            <rect x="12" y="1"  width="5" height="4" fill="var(--gold)" />
+          <svg viewBox="0 0 17 14" width="17" height="14">
+            <rect x="6"  y="0"  width="5" height="4" fill="var(--gold)" />
+            <rect x="3"  y="5"  width="5" height="4" fill="var(--gold)" />
+            <rect x="9"  y="5"  width="5" height="4" fill="var(--gold)" />
+            <rect x="0"  y="10" width="5" height="4" fill="var(--gold)" />
+            <rect x="6"  y="10" width="5" height="4" fill="var(--gold)" />
+            <rect x="12" y="10" width="5" height="4" fill="var(--gold)" />
           </svg>
         </div>
         <div class="section-header__rule" aria-hidden="true"></div>
@@ -643,7 +636,7 @@
           <span class="process__num" aria-hidden="true">III</span>
           <div class="process__body">
             <h3 class="process__title">A fair cash offer</h3>
-            <p class="process__desc">Direct from us. Clean title, your timeline. We can close in 7–21 days.</p>
+            <p class="process__desc">Direct from us. Clean title, your timeline. We can close in as little as 7 days.</p>
           </div>
         </li>
       </ol>
@@ -661,13 +654,26 @@
             <li class="as-is__bullet"><span class="as-is__dot" aria-hidden="true"></span>No repairs</li>
             <li class="as-is__bullet"><span class="as-is__dot" aria-hidden="true"></span>No cleaning</li>
             <li class="as-is__bullet"><span class="as-is__dot" aria-hidden="true"></span>No renovations</li>
-            <li class="as-is__bullet"><span class="as-is__dot" aria-hidden="true"></span>No commissions</li>
+            <li class="as-is__bullet"><span class="as-is__dot" aria-hidden="true"></span>No commissions or agent fees</li>
+            <li class="as-is__bullet"><span class="as-is__dot" aria-hidden="true"></span>Flexible closing</li>
+            <li class="as-is__bullet"><span class="as-is__dot" aria-hidden="true"></span>Inherited? Probate? Yes.</li>
+            <li class="as-is__bullet"><span class="as-is__dot" aria-hidden="true"></span>Need to sell quickly?</li>
           </ul>
           <p class="as-is__sub">
-            Inherited, tenant&#8209;occupied, vacant, or in need of work — all welcome.
-            All we need is a clean title.
+            Tenant&#8209;occupied, vacant, or in need of work — all welcome.
+            All we need is a clean title. We&rsquo;re not Realtors&reg; &mdash; we buy homes directly.
           </p>
         </div>
+      </div>
+    </section>
+
+    <!-- ── Testimonial ──────────────────────────────────────────────────── -->
+    <section class="testimonial reveal" aria-label="Customer testimonial">
+      <div class="testimonial__inner">
+        <blockquote>
+          &ldquo;Holly was honest, responsive, and made the process easy.&rdquo;
+        </blockquote>
+        <p class="testimonial__attribution">— Jacksonville Homeowner</p>
       </div>
     </section>
 
@@ -675,16 +681,13 @@
     <section class="offer reveal" id="offer" aria-labelledby="offer-hed">
       <div class="section-header">
         <div class="brick-mark" aria-hidden="true">
-          <svg viewBox="0 0 24 16" width="21" height="14">
-            <rect x="0"  y="11" width="5" height="4" fill="var(--gold)" />
-            <rect x="6"  y="11" width="5" height="4" fill="var(--gold)" />
-            <rect x="12" y="11" width="5" height="4" fill="var(--gold)" />
-            <rect x="18" y="11" width="5" height="4" fill="var(--gold)" />
-            <rect x="3"  y="6"  width="5" height="4" fill="var(--gold)" />
-            <rect x="9"  y="6"  width="5" height="4" fill="var(--gold)" />
-            <rect x="15" y="6"  width="5" height="4" fill="var(--gold)" />
-            <rect x="6"  y="1"  width="5" height="4" fill="var(--gold)" />
-            <rect x="12" y="1"  width="5" height="4" fill="var(--gold)" />
+          <svg viewBox="0 0 17 14" width="17" height="14">
+            <rect x="6"  y="0"  width="5" height="4" fill="var(--gold)" />
+            <rect x="3"  y="5"  width="5" height="4" fill="var(--gold)" />
+            <rect x="9"  y="5"  width="5" height="4" fill="var(--gold)" />
+            <rect x="0"  y="10" width="5" height="4" fill="var(--gold)" />
+            <rect x="6"  y="10" width="5" height="4" fill="var(--gold)" />
+            <rect x="12" y="10" width="5" height="4" fill="var(--gold)" />
           </svg>
         </div>
         <div class="section-header__rule" aria-hidden="true"></div>
@@ -762,29 +765,16 @@
     <footer>
       <div class="footer__rule" aria-hidden="true"></div>
       <div class="footer__inner">
-        <a href="#" class="lockup" aria-label="Core Property Ventures">
-          <div class="lockup__mark" aria-hidden="true">
-            <svg viewBox="0 0 24 16" width="17" height="11">
-              <rect x="0"  y="11" width="5" height="4" fill="var(--gold)" />
-              <rect x="6"  y="11" width="5" height="4" fill="var(--gold)" />
-              <rect x="12" y="11" width="5" height="4" fill="var(--gold)" />
-              <rect x="18" y="11" width="5" height="4" fill="var(--gold)" />
-              <rect x="3"  y="6"  width="5" height="4" fill="var(--gold)" />
-              <rect x="9"  y="6"  width="5" height="4" fill="var(--gold)" />
-              <rect x="15" y="6"  width="5" height="4" fill="var(--gold)" />
-              <rect x="6"  y="1"  width="5" height="4" fill="var(--gold)" />
-              <rect x="12" y="1"  width="5" height="4" fill="var(--gold)" />
-            </svg>
-          </div>
-          <div class="lockup__text">
-            <span class="lockup__word">CORE</span>
-            <div class="lockup__rule"></div>
-            <div class="lockup__sub">Property · Ventures</div>
-          </div>
+        <a href="#" aria-label="Core Property Ventures">
+          <img src="assets/logo.png" alt="Core Property Ventures" class="nav-logo">
         </a>
         <div class="footer__right">
-          <p class="eyebrow">Core PV · Jax FL</p>
-          <a href="mailto:holly@corepropertyventures.com" class="footer__email">
+          <p class="eyebrow">Core Property Ventures, LLC</p>
+          <address style="font-style:normal; font-family:var(--mono); font-size:11px; letter-spacing:.05em; color:var(--ink-3); margin-top:6px; line-height:1.7;">
+            7643 Gate Pkwy., Ste. 104&#8209;1304<br>
+            Jacksonville, FL 32256
+          </address>
+          <a href="mailto:holly@corepropertyventures.com" class="footer__email" style="margin-top:8px; display:block;">
             holly@corepropertyventures.com
           </a>
         </div>
